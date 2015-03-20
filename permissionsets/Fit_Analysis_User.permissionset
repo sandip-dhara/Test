@@ -95,6 +95,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>FitAnalysis__c.Business_Value__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>FitAnalysis__c.CS__c</field>
         <readable>true</readable>
@@ -206,8 +211,18 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>FitAnalysis__c.Effort__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>FitAnalysis__c.Fit_Percentage__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>FitAnalysis__c.Fit_Recommendation__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>

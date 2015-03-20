@@ -477,6 +477,20 @@ NULL)</formula>
         <type>Picklist</type>
     </fields>
     <fields>
+        <fullName>Business_Value__c</fullName>
+        <defaultValue>5</defaultValue>
+        <description>Ranking of a scale of 0 - 10 as to the Business Value of this application. The lowest ranking is 0. That means the application does not add any business value. The highest ranking is 10. That means the application adds significant value.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Ranking on a scale of  0 - 10 of business value of the application. 0 is the lowest ranking, 10 is the highest ranking.</inlineHelpText>
+        <label>Business Value</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>CS__c</fullName>
         <description>Computation Status</description>
         <externalId>false</externalId>
@@ -1020,6 +1034,20 @@ Is the requirement to post process data and produce custom formats ?</inlineHelp
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Effort__c</fullName>
+        <defaultValue>5</defaultValue>
+        <description>Ranking of development effort required to implement this application on a scale of 0 to 10. 0 is the lowest ranking and represents significant effort. 10 is the highest ranking and represents low effort.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Ranking of development effort required to implement this application on a scale of 0 to 10. 0 is the lowest ranking and represents significant effort. 10 is the highest ranking and represents low effort.</inlineHelpText>
+        <label>Effort</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Fit_Percentage__c</fullName>
         <defaultValue>0</defaultValue>
         <description>Measures the fit on a scale up to from 0% to 100%</description>
@@ -1031,6 +1059,21 @@ Is the requirement to post process data and produce custom formats ?</inlineHelp
         <scale>2</scale>
         <trackTrending>false</trackTrending>
         <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Fit_Recommendation__c</fullName>
+        <description>Recommendation based on fit analysis. Tells whether application is an excellent fit, good fit, or poor fit.</description>
+        <externalId>false</externalId>
+        <formula>IF (  Fit_Percentage__c &gt; 0.66, &apos;Excellent Fit&apos;, 
+      IF (Fit_Percentage__c &gt; 0.33 &amp;&amp; Fit_Percentage__c &lt;= 0.66, &apos;Good Fit&apos;,
+          &apos;Poor Fit&apos;))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Recommendation based on fit analysis. Tells whether application is an excellent fit, good fit, or poor fit.</inlineHelpText>
+        <label>Fit Recommendation</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>ICS__c</fullName>
@@ -1981,10 +2024,12 @@ NULL)</formula>
         <fullName>All_Applications_Summary</fullName>
         <columns>NAME</columns>
         <columns>Application_Name__c</columns>
+        <columns>Application_Description__c</columns>
         <columns>Assessment_Date__c</columns>
         <columns>Overall_Score__c</columns>
         <columns>Max_Possible_Score__c</columns>
         <columns>Fit_Percentage__c</columns>
+        <columns>Fit_Recommendation__c</columns>
         <filterScope>Everything</filterScope>
         <label>All Applications Summary</label>
     </listViews>
@@ -2011,4 +2056,22 @@ NULL)</formula>
         <searchResultsAdditionalFields>Fit_Percentage__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Business_Value_Validation</fullName>
+        <active>true</active>
+        <description>Business Value MUST be a whole number between 0 and 10</description>
+        <errorConditionFormula>IF ( Business_Value__c &lt; 0 || Business_Value__c &gt; 10, 
+TRUE, FALSE)</errorConditionFormula>
+        <errorDisplayField>Business_Value__c</errorDisplayField>
+        <errorMessage>Business Value MUST be a whole number between 0 and 10</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Effort_Validation</fullName>
+        <active>true</active>
+        <description>Effort MUST be a whole number between 0 and 10</description>
+        <errorConditionFormula>IF (  Effort__c  &lt; 0 || Effort__c &gt; 10, 
+TRUE, FALSE)</errorConditionFormula>
+        <errorDisplayField>Effort__c</errorDisplayField>
+        <errorMessage>Effort MUST be a whole number between 0 and 10</errorMessage>
+    </validationRules>
 </CustomObject>
